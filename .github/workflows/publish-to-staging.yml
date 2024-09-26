@@ -22,12 +22,12 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
-              cd /home/ubuntu/bootstrap-site &&
+              cd /home/ubuntu/bootstrap-site/ &&
               git checkout dev &&
               git fetch --all &&
               git reset --hard origin/dev &&
               git pull origin dev &&
-              sudo cp -Rf bootstrap-site/* /var/www/html/
+              sudo cp -Rf /home/ubuntu/bootstrap-site/* /var/www/html/
               sudo chown -Rf root:root /var/www/html
               sudo systemctl reload apache2
               '
