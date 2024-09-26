@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  Deploy:
+    name: Deploy to staging on EC2
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2 
+      - name: Build & Deploy
+        env:
+            PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+            HOSTNAME: ${{secrets.SSH_HOST}}
+            USER_NAME: ${{secrets.USER_NAME}}
+      
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+              # Now we have got the access of EC2 and we will start the deploy .
+              cd /home/ubuntu/bootstrap-site &&
+              git checkout dev &&
+              git fetch --all &&
+              git reset --hard origin/dev &&
+              git pull origin dev &&
+              sudo cp -Rf bootstrap-site/* /var/www/html/
+              sudo chown -Rf root:root /var/www/html
+              sudo systemctl reload apache2
+              '
