@@ -1,11 +1,11 @@
-name: Deploy
+name: Deploy www site to ec2 staging instance
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
 
 jobs:
-  Deploy:
+  Deploy-to-staging:
     name: Deploy to staging on EC2
     runs-on: ubuntu-latest
     
