@@ -1,4 +1,4 @@
-name: Deploy www site to ec2 staging instance
+name: Deploy site to staging instance
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   Deploy-to-staging:
-    name: Deploy to staging on EC2
+    name: Deploy to staging
     runs-on: ubuntu-latest
     
     steps:
