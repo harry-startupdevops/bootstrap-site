@@ -11,7 +11,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2 
-      - name: Build & Deploy
+      - name: Build and Deploy
         env:
             PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
             HOSTNAME: ${{secrets.SSH_HOST}}
