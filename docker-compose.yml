@@ -1,6 +1,6 @@
 
 services:
-  nginx:
+  web:
     build: .
     ports:
       - 80:80
